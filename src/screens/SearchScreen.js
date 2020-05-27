@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, ScrollView, StyleSheet } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
@@ -17,7 +17,8 @@ const SearchScreen = () => {
   };
 
   return (
-    <View>
+    // <View style={{ flex: 1 }}>
+    <>
       <SearchBar
         term={term}
         onTermChange={handleChange}
@@ -25,12 +26,21 @@ const SearchScreen = () => {
       />
       {errorMessage && <Text>Something went wrong!</Text>}
       {/* <Text>We have found {results.length} results.</Text> */}
-      <ResultsList results={filterResultsByPrice('$')} title="Cost Effective" />
-      <View style={styles.divider} />
-      <ResultsList results={filterResultsByPrice('$$')} title="Bit Pricier" />
-      <View style={styles.divider} />
-      <ResultsList results={filterResultsByPrice('$$$')} title="Big Spender!" />
-    </View>
+      <ScrollView>
+        <ResultsList
+          results={filterResultsByPrice('$')}
+          title="Cost Effective"
+        />
+        <View style={styles.divider} />
+        <ResultsList results={filterResultsByPrice('$$')} title="Bit Pricier" />
+        <View style={styles.divider} />
+        <ResultsList
+          results={filterResultsByPrice('$$$')}
+          title="Big Spender!"
+        />
+      </ScrollView>
+      {/* </View> */}
+    </>
   );
 };
 
@@ -38,8 +48,8 @@ const styles = StyleSheet.create({
   divider: {
     borderBottomColor: 'lightgray',
     borderBottomWidth: 1,
-    height: 10,
-    marginBottom: 10
+    // height: 10,
+    marginBottom: 5
   }
 });
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
+import ResultsDetail from './ResultsDetail';
 
 const ResultsList = ({ title, results }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <FlatList
         horizontal
@@ -11,17 +12,7 @@ const ResultsList = ({ title, results }) => {
         data={results}
         keyExtractor={result => result.id}
         renderItem={({ item }) => {
-          return (
-            <View style={styles.listItem}>
-              <Image source={{ uri: item.image_url }} style={styles.image} />
-              <Text numberOfLines={1} style={styles.name}>
-                {item.name}
-              </Text>
-              <Text style={styles.rating}>
-                {item.rating} Stars, {item.review_count} Reviews
-              </Text>
-            </View>
-          );
+          return <ResultsDetail result={item} />;
         }}
       />
     </View>
@@ -29,25 +20,14 @@ const ResultsList = ({ title, results }) => {
 };
 
 const styles = StyleSheet.create({
-  image: {
-    height: 125,
-    width: 'auto'
-  },
-  listItem: {
-    marginRight: 25,
-    marginTop: 10,
-    width: 250
-  },
-  name: {
-    fontWeight: 'bold',
-    lineHeight: 25
-  },
-  rating: {
-    color: 'gray'
+  container: {
+    marginBottom: 10
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom: 5,
+    marginLeft: 15
   }
 });
 
