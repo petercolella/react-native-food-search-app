@@ -24,14 +24,23 @@ const SearchScreen = () => {
         onTermSubmit={() => searchApi(term)}
       />
       {errorMessage && <Text>Something went wrong!</Text>}
-      <Text>We have found {results.length} results.</Text>
+      {/* <Text>We have found {results.length} results.</Text> */}
       <ResultsList results={filterResultsByPrice('$')} title="Cost Effective" />
+      <View style={styles.divider} />
       <ResultsList results={filterResultsByPrice('$$')} title="Bit Pricier" />
+      <View style={styles.divider} />
       <ResultsList results={filterResultsByPrice('$$$')} title="Big Spender!" />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  divider: {
+    borderBottomColor: 'lightgray',
+    borderBottomWidth: 1,
+    height: 10,
+    marginBottom: 10
+  }
+});
 
 export default SearchScreen;
